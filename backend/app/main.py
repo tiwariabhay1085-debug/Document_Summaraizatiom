@@ -1,5 +1,10 @@
 from fastapi import FastAPI
 
+from app.database.database import Base, engine
+from app.models.user import User
+
+Base.metadata.create_all(bind=engine)
+
 app = FastAPI(
     title="AI Document Intelligence API",
     description="Backend API for AI-powered document management and analysis.",
@@ -17,6 +22,4 @@ def root():
 
 @app.get("/health")
 def health_check():
-    return {
-        "status": "healthy"
-    }
+    return {"status": "healthy"}
